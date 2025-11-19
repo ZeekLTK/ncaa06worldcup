@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sports Overlay (Compact)</title>
+  <style>
+    :root { --w: 502px; }
+    html, body { margin: 0; padding: 0; background: #111; }
+    body {
+      font-family: Arial, sans-serif;
+      color: #eee;
+      padding: 6px;
+      width: var(--w);
+      box-sizing: border-box;
+    }
+	h1 {
+	    text-align: center;
+	}
+    h2 {
+      margin: 6px 0 4px;
+      font-size: 14px;
+      text-align: center;
+      color: #ffcc00;
+    }
+    label { font-size: 14px; margin-right: 4px; }
+    select {
+      margin: 3px 6px 3px 0;
+      font-size: 14px;
+      padding: 2px 4px;
+      max-width: calc(var(--w) - 12px);
+      background: #1b1b1b;
+      color: #eee;
+      border: 1px solid #444;
+      border-radius: 2px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 4px 0;
+      font-size: 14px;
+    }
+    th, td {
+      border: 1px solid #444;
+      padding: 3px 4px;
+      text-align: center;
+      word-break: break-word;
+    }
+    th { background: #222; font-weight: bold; }
+    .highlight { background: #2a2a2a; }
+    .row {
+      display: flex;
+      gap: 6px;
+      width: 100%;
+    }
+    .col { flex: 1; min-width: 0; }
+    .subhead {
+      font-size: 11px; margin: 2px 0; text-align: center; color: #9ad;
+    }
+    .controls { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+    .error { color: #ff8a8a; font-size: 12px; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="controls">
+    <label for="groupSelect">Group:</label>
+    <select id="groupSelect"></select>
+
+    <button id="toggleCycle">Start Auto-Cycle</button>
+	
+	<label for="roundSelect">Round:</label>
+  <select id="roundSelect">
+    <option value="all">All Rounds</option>
+    <option value="1">Round 1</option>
+    <option value="2">Round 2</option>
+    <option value="3">Round 3</option>
+    <option value="4">Round 4</option>
+  </select>
+
+    <label for="teamASelect">Team A:</label>
+    <select id="teamASelect"></select>
+
+    <label for="teamBSelect">Team B:</label>
+    <select id="teamBSelect"></select>
+  </div>
+  
+ <h1 id="groupTitle"></h1>
+
+  <h2>Standings</h2>
+  <table id="standingsTable">
+    <thead>
+      <tr><th>Team</th><th>Group</th><th>Overall</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <div id="standingsError" class="error" style="display:none;"></div>
+
+  <h2>Schedules</h2>
+  <div class="row">
+    <div class="col">
+      <div id="teamATitle" class="subhead"></div>
+      <table id="scheduleATable">
+        <thead>
+          <tr><th>Wk</th><th>Opponent</th><th>Result</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="col">
+      <div id="teamBTitle" class="subhead"></div>
+      <table id="scheduleBTable">
+        <thead>
+          <tr><th>Wk</th><th>Opponent</th><th>Result</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+  <div id="schedulesError" class="error" style="display:none;"></div>
+  
+    <h2>Scores</h2>
+  <table id="scoresTable">
+    <thead>
+      <tr><th>Week</th><th>Matchup</th><th>Score</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <div id="scoresError" class="error" style="display:none;"></div>
+  
+  
+
+  <!-- Load your generated data.js (must define: var data = {...}) -->
+  <script src="data.js"></script>
+  <script>
+    // ===== Normalization =====
+    function toInt(x) {
+      if (x === null || x === undefined) return null;
+      const n = parseInt(x, 10);
+      return Number.isNaN(n) ? null : n;
+    }
+
+    function normalize() {
+      if (!window.data || !data.groups) {
+        return { groups: [] };
+      }
+
+      let groupsArr = [];
+
+      // CASE A: groups is already an array [{name, standings, games, schedule}]
+      if (Array.isArray(data.groups)) {
+        groupsArr = data.groups.map(g => ({
+          name: g.name ?? "Group",
+          standings: normalizeStandings(g.standings),
+          games: normalizeGames(g.games ?? g.scores), // accept games[] or scores[]
+          schedule: normalizeScheduleArray(g.schedule, g.games ?? g.scores)
+        }));
+      } else {
+        // CASE B: groups is an object map { "A": { ... }, "B": { ... } }
+        for (const [name, g] of Object.entries(data.groups)) {
+          const standings = normalizeStandings(g.standings);
+          const games = normalizeGames(g.games ?? g.scores);
+          const schedule = normalizeScheduleMapOrArray(g.schedule, games);
+
+          groupsArr.push({
+            name: g.name ?? name,
+            standings,
+            games,
+            schedule
+          });
+        }
+      }
+
+      return { groups: groupsArr };
+    }
+
+    function normalizeStandings(st) {
+      // Accept:
+      //  - array [{team, W, L, overallW, overallL}]
+      //  - object { "Team": {W,L,overallW,overallL}, ... }
+      if (!st) return [];
+      if (Array.isArray(st)) {
+        return st.map(t => ({
+          team: t.team,
+          W: toInt(t.W) ?? 0,
+          L: toInt(t.L) ?? 0,
+          overallW: toInt(t.overallW) ?? 0,
+          overallL: toInt(t.overallL) ?? 0
+        }));
+      } else {
+        return Object.entries(st).map(([team, rec]) => ({
+          team,
+          W: toInt(rec.W) ?? 0,
+          L: toInt(rec.L) ?? 0,
+          overallW: toInt(rec.overallW) ?? 0,
+          overallL: toInt(rec.overallL) ?? 0
+        }));
+      }
+    }
+
+    function normalizeGames(gArr) {
+      // Accept:
+      //  - games: [{week, home, away, homeScore, awayScore}]
+      //  - scores: [{week, team1, team2, score1, score2}]
+      if (!gArr) return [];
+      return gArr.map(g => {
+        const week = g.week ?? "";
+        if (g.home !== undefined && g.away !== undefined) {
+          return {
+            week: week,
+            home: g.home,
+            away: g.away,
+            homeScore: toInt(g.homeScore),
+            awayScore: toInt(g.awayScore)
+          };
+        } else {
+          // team1/team2 shape -> treat team1 as "home"
+          return {
+            week: week,
+            home: g.team1,
+            away: g.team2,
+            homeScore: toInt(g.score1),
+            awayScore: toInt(g.score2)
+          };
+        }
+      });
+    }
+
+    function normalizeScheduleArray(scheduleArr, gamesForFallback) {
+      // Accept array entries with { team, week, opponent, result }
+      if (Array.isArray(scheduleArr) && scheduleArr.length) {
+        return scheduleArr.map(s => ({
+          team: s.team,
+          week: s.week ?? "",
+          opponent: s.opponent ?? "",
+          result: s.result ?? ""
+        }));
+      }
+      // If nothing provided, derive from games
+      return deriveScheduleFromGames(gamesForFallback);
+    }
+
+    function normalizeScheduleMapOrArray(schedule, gamesForFallback) {
+      // Accept:
+      //  - map { "Team": [ {opponent, result, week, ...}, ... ] }
+      //  - array same as normalizeScheduleArray
+      if (!schedule) {
+        return deriveScheduleFromGames(gamesForFallback);
+      }
+      if (Array.isArray(schedule)) {
+        return normalizeScheduleArray(schedule, gamesForFallback);
+      }
+      // Map form
+      const out = [];
+      for (const [team, list] of Object.entries(schedule)) {
+        (list || []).forEach(entry => {
+          out.push({
+            team,
+            week: entry.week ?? "",
+            opponent: entry.opponent ?? "",
+            result: entry.result ?? ""
+          });
+        });
+      }
+      return out.length ? out : deriveScheduleFromGames(gamesForFallback);
+    }
+
+    function deriveScheduleFromGames(gArr) {
+      // Build per-team schedule from games list
+      if (!Array.isArray(gArr)) return [];
+      const out = [];
+      gArr.forEach(g => {
+        const week = g.week ?? "";
+        const hs = toInt(g.homeScore);
+        const as = toInt(g.awayScore);
+
+        function resStr(me, opp, myScore, oppScore, isHome) {
+          if (myScore === null || oppScore === null) return `vs ${opp} (upcoming)`;
+          const win = myScore > oppScore;
+          const loc = "vs"; // compact
+          return `${win ? "W" : "L"} ${myScore}-${oppScore}`;
+        }
+
+        // Home team's view
+        out.push({
+          team: g.home,
+          week,
+          opponent: g.away,
+          result: resStr(g.home, g.away, hs, as, true)
+        });
+        // Away team's view
+        out.push({
+          team: g.away,
+          week,
+          opponent: g.home,
+          result: resStr(g.away, g.home, as, hs, false)
+        });
+      });
+      return out;
+    }
+
+    // ===== Rendering =====
+    const groupSelect = document.getElementById("groupSelect");
+    const teamASelect = document.getElementById("teamASelect");
+    const teamBSelect = document.getElementById("teamBSelect");
+
+    const standingsBody = document.querySelector("#standingsTable tbody");
+    const scoresBody = document.querySelector("#scoresTable tbody");
+    const scheduleABody = document.querySelector("#scheduleATable tbody");
+    const scheduleBBody = document.querySelector("#scheduleBTable tbody");
+
+    const standingsError = document.getElementById("standingsError");
+    const scoresError = document.getElementById("scoresError");
+    const schedulesError = document.getElementById("schedulesError");
+
+    const teamATitle = document.getElementById("teamATitle");
+    const teamBTitle = document.getElementById("teamBTitle");
+
+    const normalized = normalize();
+
+    function uniqueTeamsFrom(group) {
+      const fromStandings = group.standings.map(t => t.team);
+      if (fromStandings.length) return fromStandings;
+      const fromSchedule = [...new Set(group.schedule.map(s => s.team))];
+      if (fromSchedule.length) return fromSchedule;
+      const fromGames = [...new Set(group.games.flatMap(g => [g.home, g.away]))];
+      return fromGames;
+    }
+
+    function populateGroupOptions() {
+  const roundFilter = document.getElementById("roundSelect").value; // "all", "1", "2", etc.
+  groupSelect.innerHTML = "";
+
+  normalized.groups.forEach((g, idx) => {
+    // Extract the leading digits after the word "Group"
+    // Matches "Group 1A" -> "1", "Group 2TA" -> "2", "Group 10X" -> "10"
+    const m = (g.name || "").match(/^Group\s*(\d+)/i);
+    const groupRound = m ? m[1] : null;
+
+    if (roundFilter === "all" || (groupRound && groupRound === roundFilter)) {
+      const opt = document.createElement("option");
+      opt.value = idx;    // keep original normalized.groups index
+      opt.textContent = g.name;
+      groupSelect.appendChild(opt);
+    }
+  });
+
+  // Select the first filtered group if any
+  if (groupSelect.options.length > 0) {
+    groupSelect.selectedIndex = 0;
+  }
+}
+
+
+
+    function populateTeamOptions(group) {
+      const teams = uniqueTeamsFrom(group);
+      teamASelect.innerHTML = "";
+      teamBSelect.innerHTML = "";
+      teams.forEach(t => {
+        const o1 = document.createElement("option"); o1.value = t; o1.textContent = t;
+        const o2 = document.createElement("option"); o2.value = t; o2.textContent = t;
+        teamASelect.appendChild(o1);
+        teamBSelect.appendChild(o2);
+      });
+      // pick first two by default
+      if (teams.length) teamASelect.value = teams[0];
+      if (teams.length > 1) teamBSelect.value = teams[1];
+    }
+
+    function sortStandings(arr) {
+      // Sort: group W desc, L asc; then overallW desc, overallL asc; then name
+      return [...arr].sort((a, b) => {
+        if (b.W !== a.W) return b.W - a.W;
+        if (a.L !== b.L) return a.L - b.L;
+        if (b.overallW !== a.overallW) return b.overallW - a.overallW;
+        if (a.overallL !== b.overallL) return a.overallL - b.overallL;
+        return (a.team || "").localeCompare(b.team || "");
+      });
+    }
+
+    function renderStandings(group) {
+      standingsError.style.display = "none";
+      standingsBody.innerHTML = "";
+	  
+	  const allGroups = normalized.groups;
+	  const overallTotals = {};
+
+		allGroups.forEach(g => {
+		g.standings.forEach(s => {
+		const t = s.team;
+		if (!overallTotals[t]) overallTotals[t] = { W: 0, L: 0 };
+		overallTotals[t].W += s.W ?? 0;
+		overallTotals[t].L += s.L ?? 0;
+		});
+	  });
+
+		// apply to this group's standings
+		group.standings.forEach(s => {
+		  if (overallTotals[s.team]) {
+			s.overallW = overallTotals[s.team].W;
+			s.overallL = overallTotals[s.team].L;
+			}
+		});
+
+      const rows = sortStandings(group.standings).map(t => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td>${t.team ?? ""}</td><td>${t.W ?? 0}-${t.L ?? 0}</td><td>${t.overallW ?? 0}-${t.overallL ?? 0}</td>`;
+        return tr;
+      });
+      if (!rows.length) {
+        standingsError.textContent = "No standings found for this group.";
+        standingsError.style.display = "block";
+      } else {
+        rows.forEach(r => standingsBody.appendChild(r));
+      }
+    }
+
+    function renderScores(group, teamA, teamB) {
+      scoresError.style.display = "none";
+      scoresBody.innerHTML = "";
+
+      const rows = group.games.map(g => {
+        const involve = [g.home, g.away].includes(teamA) || [g.home, g.away].includes(teamB);
+        const tr = document.createElement("tr");
+        if (involve) tr.classList.add("highlight");
+        const hs = (g.homeScore ?? "") === null ? "" : (g.homeScore ?? "");
+        const as = (g.awayScore ?? "") === null ? "" : (g.awayScore ?? "");
+        tr.innerHTML = `<td>${g.week ?? ""}</td><td>${g.away ?? ""} at ${g.home ?? ""}</td><td>${as}${as!==""||hs!==""? " - " : ""}${hs}</td>`;
+        return tr;
+      });
+
+      if (!rows.length) {
+        scoresError.textContent = "No scores/games found for this group.";
+        scoresError.style.display = "block";
+      } else {
+        rows.forEach(r => scoresBody.appendChild(r));
+      }
+    }
+
+    function renderScheduleFor(team, currentGroup, bodyEl, titleEl) {
+  	titleEl.textContent = team || "";
+  	bodyEl.innerHTML = "";
+
+  if (!team) return;
+
+  // Collect schedule entries for this team from ALL groups
+  const allSchedules = normalized.groups.flatMap(g => g.schedule || []);
+  const items = allSchedules
+    .filter(s => s.team === team)
+    .sort((a, b) => {
+      const aw = toInt(a.week), bw = toInt(b.week);
+      if (aw !== null && bw !== null) return aw - bw;
+      return ("" + a.week).localeCompare("" + b.week);
+    });
+
+  const rows = items.map(s => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td>${s.week ?? ""}</td><td>${s.opponent ?? ""}</td><td>${s.result ?? ""}</td>`;
+    return tr;
+  });
+
+  if (!rows.length) {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td colspan="3">No schedule for ${team}</td>`;
+    bodyEl.appendChild(tr);
+  } else {
+    rows.forEach(r => bodyEl.appendChild(r));
+  }
+}
+
+
+    function renderAll() {
+      const idx = parseInt(groupSelect.value, 10);
+      const group = normalized.groups[idx];
+      if (!group) return;
+	  
+	  document.getElementById("groupTitle").textContent = group.name;
+
+      // Ensure team selects have options
+      if (!teamASelect.options.length || !teamBSelect.options.length) {
+        populateTeamOptions(group);
+      }
+
+      const teamA = teamASelect.value;
+      const teamB = teamBSelect.value;
+
+      renderStandings(group);
+      renderScores(group, teamA, teamB);
+      renderScheduleFor(teamA, group, scheduleABody, teamATitle);
+      renderScheduleFor(teamB, group, scheduleBBody, teamBTitle);
+    }
+
+    // ===== Initialize =====
+    (function init() {
+      populateGroupOptions();
+
+      if (!normalized.groups.length) {
+        // show graceful error rows
+        document.getElementById("standingsError").textContent = "No groups/data found. Check that data.js defines: var data = { groups: ... }";
+        document.getElementById("standingsError").style.display = "block";
+        document.getElementById("scoresError").textContent = "No groups/data found.";
+        document.getElementById("scoresError").style.display = "block";
+        document.getElementById("schedulesError").textContent = "No groups/data found.";
+        document.getElementById("schedulesError").style.display = "block";
+        return;
+      }
+
+      groupSelect.value = "0";
+      populateTeamOptions(normalized.groups[0]);
+      renderAll();
+
+      groupSelect.addEventListener("change", () => {
+  const normalizedIndex = parseInt(groupSelect.options[groupSelect.selectedIndex].value, 10);
+  const group = normalized.groups[normalizedIndex];
+  if (group) {
+    populateTeamOptions(group); // repopulate team dropdowns with the right teams
+    renderAll();                // redraw standings/scores/schedules
+  }
+});
+
+	  document.getElementById("roundSelect").addEventListener("change", () => {
+  populateGroupOptions();
+  renderAll();
+});
+      teamASelect.addEventListener("change", renderAll);
+      teamBSelect.addEventListener("change", renderAll);
+    })();
+
+let autoCycle = false;
+let cycleInterval = null;
+
+function startCycle() {
+  if (cycleInterval) clearInterval(cycleInterval);
+
+  cycleInterval = setInterval(() => {
+    const select = document.getElementById("groupSelect");
+    if (!select.options.length) return;
+
+    let nextOptionIndex = select.selectedIndex + 1;
+    if (nextOptionIndex >= select.options.length) nextOptionIndex = 0;
+    select.selectedIndex = nextOptionIndex;
+
+    const normalizedIndex = parseInt(select.options[nextOptionIndex].value, 10);
+    const group = normalized.groups[normalizedIndex];
+    if (group) {
+      populateTeamOptions(group); // refresh teams for the new group
+      renderAll();
+    }
+  }, 20000);
+}
+
+
+
+function stopCycle() {
+  if (cycleInterval) clearInterval(cycleInterval);
+  cycleInterval = null;
+}
+
+document.getElementById("toggleCycle").addEventListener("click", () => {
+  autoCycle = !autoCycle;
+  const btn = document.getElementById("toggleCycle");
+
+  if (autoCycle) {
+    btn.textContent = "Stop Auto-Cycle";
+    startCycle();
+  } else {
+    btn.textContent = "Start Auto-Cycle";
+    stopCycle();
+  }
+});
+
+
+  </script>
+</body>
+</html>
