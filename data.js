@@ -5129,6 +5129,13 @@ var data = {
         },
         {
           "week": 6,
+          "home": "Temple",
+          "away": "UCLA",
+          "homeScore": 13,
+          "awayScore": 52
+        },
+        {
+          "week": 6,
           "home": "Louisiana Tech",
           "away": "Clemson",
           "homeScore": 30,
@@ -5151,6 +5158,13 @@ var data = {
           "overallL": 0
         },
         {
+          "team": "UCLA",
+          "W": 1,
+          "L": 0,
+          "overallW": 1,
+          "overallL": 0
+        },
+        {
           "team": "Clemson",
           "W": 0,
           "L": 1,
@@ -5163,11 +5177,25 @@ var data = {
           "L": 1,
           "overallW": 0,
           "overallL": 1
+        },
+        {
+          "team": "Temple",
+          "W": 0,
+          "L": 1,
+          "overallW": 0,
+          "overallL": 1
         }
       ]
     },
     "Group 2TC": {
       "games": [
+        {
+          "week": 6,
+          "home": "Wake Forest",
+          "away": "Georgia Tech",
+          "homeScore": 31,
+          "awayScore": 0
+        },
         {
           "week": 6,
           "home": "Boston College",
@@ -5197,6 +5225,20 @@ var data = {
           "L": 0,
           "overallW": 1,
           "overallL": 0
+        },
+        {
+          "team": "Wake Forest",
+          "W": 1,
+          "L": 0,
+          "overallW": 1,
+          "overallL": 0
+        },
+        {
+          "team": "Georgia Tech",
+          "W": 0,
+          "L": 1,
+          "overallW": 0,
+          "overallL": 1
         },
         {
           "team": "Indiana",
@@ -5229,11 +5271,25 @@ var data = {
           "away": "Penn State",
           "homeScore": 7,
           "awayScore": 31
+        },
+        {
+          "week": 6,
+          "home": "NC State",
+          "away": "Oklahoma State",
+          "homeScore": 34,
+          "awayScore": 7
         }
       ],
       "standings": [
         {
           "team": "Florida",
+          "W": 1,
+          "L": 0,
+          "overallW": 1,
+          "overallL": 0
+        },
+        {
+          "team": "NC State",
           "W": 1,
           "L": 0,
           "overallW": 1,
@@ -5248,6 +5304,13 @@ var data = {
         },
         {
           "team": "Arkansas",
+          "W": 0,
+          "L": 1,
+          "overallW": 0,
+          "overallL": 1
+        },
+        {
+          "team": "Oklahoma State",
           "W": 0,
           "L": 1,
           "overallW": 0,
@@ -5346,6 +5409,13 @@ var data = {
           "away": "Idaho",
           "homeScore": 44,
           "awayScore": 27
+        },
+        {
+          "week": 6,
+          "home": "Wyoming",
+          "away": "Texas",
+          "homeScore": 13,
+          "awayScore": 45
         }
       ],
       "standings": [
@@ -5364,6 +5434,13 @@ var data = {
           "overallL": 0
         },
         {
+          "team": "Texas",
+          "W": 1,
+          "L": 0,
+          "overallW": 1,
+          "overallL": 0
+        },
+        {
           "team": "Idaho",
           "W": 0,
           "L": 1,
@@ -5372,6 +5449,13 @@ var data = {
         },
         {
           "team": "Missouri",
+          "W": 0,
+          "L": 1,
+          "overallW": 0,
+          "overallL": 1
+        },
+        {
+          "team": "Wyoming",
           "W": 0,
           "L": 1,
           "overallW": 0,
@@ -5452,6 +5536,13 @@ var data = {
       "games": [
         {
           "week": 6,
+          "home": "Baylor",
+          "away": "South Carolina",
+          "homeScore": 31,
+          "awayScore": 24
+        },
+        {
+          "week": 6,
           "home": "Northwestern",
           "away": "Mid Tenn State",
           "homeScore": 45,
@@ -5466,6 +5557,13 @@ var data = {
         }
       ],
       "standings": [
+        {
+          "team": "Baylor",
+          "W": 1,
+          "L": 0,
+          "overallW": 1,
+          "overallL": 0
+        },
         {
           "team": "Northwestern",
           "W": 1,
@@ -5488,6 +5586,13 @@ var data = {
           "overallL": 1
         },
         {
+          "team": "South Carolina",
+          "W": 0,
+          "L": 1,
+          "overallW": 0,
+          "overallL": 1
+        },
+        {
           "team": "UAB",
           "W": 0,
           "L": 1,
@@ -5498,6 +5603,13 @@ var data = {
     },
     "Group 2TI": {
       "games": [
+        {
+          "week": 6,
+          "home": "Vanderbilt",
+          "away": "Alabama",
+          "homeScore": 13,
+          "awayScore": 31
+        },
         {
           "week": 6,
           "home": "New Mexico",
@@ -5514,6 +5626,13 @@ var data = {
         }
       ],
       "standings": [
+        {
+          "team": "Alabama",
+          "W": 1,
+          "L": 0,
+          "overallW": 1,
+          "overallL": 0
+        },
         {
           "team": "New Mexico",
           "W": 1,
@@ -5541,6 +5660,13 @@ var data = {
           "L": 1,
           "overallW": 0,
           "overallL": 1
+        },
+        {
+          "team": "Vanderbilt",
+          "W": 0,
+          "L": 1,
+          "overallW": 0,
+          "overallL": 1
         }
       ]
     },
@@ -5552,6 +5678,20 @@ var data = {
           "away": "Iowa",
           "homeScore": 23,
           "awayScore": 37
+        },
+        {
+          "week": 6,
+          "home": "Purdue",
+          "away": "Ohio State",
+          "homeScore": 21,
+          "awayScore": 48
+        },
+        {
+          "week": 6,
+          "home": "Texas Tech",
+          "away": "Nevada",
+          "homeScore": 31,
+          "awayScore": 16
         }
       ],
       "standings": [
@@ -5563,7 +5703,35 @@ var data = {
           "overallL": 0
         },
         {
+          "team": "Ohio State",
+          "W": 1,
+          "L": 0,
+          "overallW": 1,
+          "overallL": 0
+        },
+        {
+          "team": "Texas Tech",
+          "W": 1,
+          "L": 0,
+          "overallW": 1,
+          "overallL": 0
+        },
+        {
           "team": "Miami OH",
+          "W": 0,
+          "L": 1,
+          "overallW": 0,
+          "overallL": 1
+        },
+        {
+          "team": "Nevada",
+          "W": 0,
+          "L": 1,
+          "overallW": 0,
+          "overallL": 1
+        },
+        {
+          "team": "Purdue",
           "W": 0,
           "L": 1,
           "overallW": 0,
@@ -5717,9 +5885,30 @@ var data = {
           "away": "Illinois",
           "homeScore": 10,
           "awayScore": 17
+        },
+        {
+          "week": 6,
+          "home": "Western Kentucky",
+          "away": "Memphis",
+          "homeScore": 0,
+          "awayScore": 45
+        },
+        {
+          "week": 6,
+          "home": "Connecticut",
+          "away": "South Carolina State",
+          "homeScore": 31,
+          "awayScore": 13
         }
       ],
       "standings": [
+        {
+          "team": "Connecticut",
+          "W": 1,
+          "L": 0,
+          "overallW": 1,
+          "overallL": 0
+        },
         {
           "team": "Illinois",
           "W": 1,
@@ -5728,7 +5917,28 @@ var data = {
           "overallL": 0
         },
         {
+          "team": "Memphis",
+          "W": 1,
+          "L": 0,
+          "overallW": 1,
+          "overallL": 0
+        },
+        {
           "team": "Kent State",
+          "W": 0,
+          "L": 1,
+          "overallW": 0,
+          "overallL": 1
+        },
+        {
+          "team": "South Carolina State",
+          "W": 0,
+          "L": 1,
+          "overallW": 0,
+          "overallL": 1
+        },
+        {
+          "team": "Western Kentucky",
           "W": 0,
           "L": 1,
           "overallW": 0,
@@ -5747,6 +5957,13 @@ var data = {
         },
         {
           "week": 6,
+          "home": "Norfolk State",
+          "away": "Boise State",
+          "homeScore": 0,
+          "awayScore": 59
+        },
+        {
+          "week": 6,
           "home": "Southeastern",
           "away": "Utah State",
           "homeScore": 35,
@@ -5754,6 +5971,13 @@ var data = {
         }
       ],
       "standings": [
+        {
+          "team": "Boise State",
+          "W": 1,
+          "L": 0,
+          "overallW": 1,
+          "overallL": 0
+        },
         {
           "team": "North Carolina",
           "W": 1,
@@ -5770,6 +5994,13 @@ var data = {
         },
         {
           "team": "Duke",
+          "W": 0,
+          "L": 1,
+          "overallW": 0,
+          "overallL": 1
+        },
+        {
+          "team": "Norfolk State",
           "W": 0,
           "L": 1,
           "overallW": 0,
@@ -5795,8 +6026,15 @@ var data = {
         },
         {
           "week": 6,
+          "home": "NC A&T State",
+          "away": "USF",
+          "homeScore": 17,
+          "awayScore": 76
+        },
+        {
+          "week": 6,
           "home": "Air Force",
-          "away": "UL Lafeyette",
+          "away": "UL Lafayette",
           "homeScore": 7,
           "awayScore": 27
         }
@@ -5810,7 +6048,14 @@ var data = {
           "overallL": 0
         },
         {
-          "team": "UL Lafeyette",
+          "team": "UL Lafayette",
+          "W": 1,
+          "L": 0,
+          "overallW": 1,
+          "overallL": 0
+        },
+        {
+          "team": "USF",
           "W": 1,
           "L": 0,
           "overallW": 1,
@@ -5818,6 +6063,13 @@ var data = {
         },
         {
           "team": "Air Force",
+          "W": 0,
+          "L": 1,
+          "overallW": 0,
+          "overallL": 1
+        },
+        {
+          "team": "NC A&T State",
           "W": 0,
           "L": 1,
           "overallW": 0,
@@ -5901,6 +6153,75 @@ var data = {
         }
       ]
     },
+    "Group 2MF": {
+      "games": [
+        {
+          "week": 6,
+          "home": "New Hampshire",
+          "away": "Stephen F. Austin",
+          "homeScore": 58,
+          "awayScore": 0
+        },
+        {
+          "week": 6,
+          "home": "Ole Miss",
+          "away": "Mississippi State",
+          "homeScore": 21,
+          "awayScore": 7
+        },
+        {
+          "week": 6,
+          "home": "Northern Illinois",
+          "away": "Eastern Michigan",
+          "homeScore": 38,
+          "awayScore": 0
+        }
+      ],
+      "standings": [
+        {
+          "team": "New Hampshire",
+          "W": 1,
+          "L": 0,
+          "overallW": 1,
+          "overallL": 0
+        },
+        {
+          "team": "Northern Illinois",
+          "W": 1,
+          "L": 0,
+          "overallW": 1,
+          "overallL": 0
+        },
+        {
+          "team": "Ole Miss",
+          "W": 1,
+          "L": 0,
+          "overallW": 1,
+          "overallL": 0
+        },
+        {
+          "team": "Eastern Michigan",
+          "W": 0,
+          "L": 1,
+          "overallW": 0,
+          "overallL": 1
+        },
+        {
+          "team": "Mississippi State",
+          "W": 0,
+          "L": 1,
+          "overallW": 0,
+          "overallL": 1
+        },
+        {
+          "team": "Stephen F. Austin",
+          "W": 0,
+          "L": 1,
+          "overallW": 0,
+          "overallL": 1
+        }
+      ]
+    },
     "Group 2MG": {
       "games": [
         {
@@ -5909,6 +6230,20 @@ var data = {
           "away": "Akron",
           "homeScore": 0,
           "awayScore": 61
+        },
+        {
+          "week": 6,
+          "home": "Southern",
+          "away": "Utah",
+          "homeScore": 7,
+          "awayScore": 37
+        },
+        {
+          "week": 6,
+          "home": "Tulane",
+          "away": "Eastern Kentucky",
+          "homeScore": 59,
+          "awayScore": 7
         }
       ],
       "standings": [
@@ -5920,7 +6255,35 @@ var data = {
           "overallL": 0
         },
         {
+          "team": "Tulane",
+          "W": 1,
+          "L": 0,
+          "overallW": 1,
+          "overallL": 0
+        },
+        {
+          "team": "Utah",
+          "W": 1,
+          "L": 0,
+          "overallW": 1,
+          "overallL": 0
+        },
+        {
           "team": "Chattanooga",
+          "W": 0,
+          "L": 1,
+          "overallW": 0,
+          "overallL": 1
+        },
+        {
+          "team": "Eastern Kentucky",
+          "W": 0,
+          "L": 1,
+          "overallW": 0,
+          "overallL": 1
+        },
+        {
+          "team": "Southern",
           "W": 0,
           "L": 1,
           "overallW": 0,
@@ -5943,6 +6306,13 @@ var data = {
           "away": "Toledo",
           "homeScore": 17,
           "awayScore": 7
+        },
+        {
+          "week": 6,
+          "home": "Pittsburgh",
+          "away": "Hofstra",
+          "homeScore": 35,
+          "awayScore": 10
         }
       ],
       "standings": [
@@ -5954,11 +6324,25 @@ var data = {
           "overallL": 0
         },
         {
+          "team": "Pittsburgh",
+          "W": 1,
+          "L": 0,
+          "overallW": 1,
+          "overallL": 0
+        },
+        {
           "team": "Rice",
           "W": 1,
           "L": 0,
           "overallW": 1,
           "overallL": 0
+        },
+        {
+          "team": "Hofstra",
+          "W": 0,
+          "L": 1,
+          "overallW": 0,
+          "overallL": 1
         },
         {
           "team": "Marshall",
@@ -6125,6 +6509,13 @@ var data = {
         },
         {
           "week": 6,
+          "home": "West Virginia",
+          "away": "Oregon State",
+          "homeScore": 19,
+          "awayScore": 0
+        },
+        {
+          "week": 6,
           "home": "Western Michigan",
           "away": "Kentucky",
           "homeScore": 16,
@@ -6147,7 +6538,21 @@ var data = {
           "overallL": 0
         },
         {
+          "team": "West Virginia",
+          "W": 1,
+          "L": 0,
+          "overallW": 1,
+          "overallL": 0
+        },
+        {
           "team": "Cincinnati",
+          "W": 0,
+          "L": 1,
+          "overallW": 0,
+          "overallL": 1
+        },
+        {
+          "team": "Oregon State",
           "W": 0,
           "L": 1,
           "overallW": 0,
@@ -6170,15 +6575,57 @@ var data = {
           "away": "Tennessee Tech",
           "homeScore": 24,
           "awayScore": 31
+        },
+        {
+          "week": 6,
+          "home": "Northern Arizona",
+          "away": "Morgan State",
+          "homeScore": 40,
+          "awayScore": 28
+        },
+        {
+          "week": 6,
+          "home": "Delaware State",
+          "away": "Florida A&M",
+          "homeScore": 32,
+          "awayScore": 38
         }
       ],
       "standings": [
+        {
+          "team": "Florida A&M",
+          "W": 1,
+          "L": 0,
+          "overallW": 1,
+          "overallL": 0
+        },
+        {
+          "team": "Northern Arizona",
+          "W": 1,
+          "L": 0,
+          "overallW": 1,
+          "overallL": 0
+        },
         {
           "team": "Tennessee Tech",
           "W": 1,
           "L": 0,
           "overallW": 1,
           "overallL": 0
+        },
+        {
+          "team": "Delaware State",
+          "W": 0,
+          "L": 1,
+          "overallW": 0,
+          "overallL": 1
+        },
+        {
+          "team": "Morgan State",
+          "W": 0,
+          "L": 1,
+          "overallW": 0,
+          "overallL": 1
         },
         {
           "team": "Northwestern State",
@@ -6197,6 +6644,20 @@ var data = {
           "away": "Alcorn State",
           "homeScore": 37,
           "awayScore": 14
+        },
+        {
+          "week": 6,
+          "home": "Prairie View A&M",
+          "away": "Dartmouth",
+          "homeScore": 42,
+          "awayScore": 63
+        },
+        {
+          "week": 6,
+          "home": "Samford",
+          "away": "Jackson State",
+          "homeScore": 66,
+          "awayScore": 0
         }
       ],
       "standings": [
@@ -6208,7 +6669,35 @@ var data = {
           "overallL": 0
         },
         {
+          "team": "Dartmouth",
+          "W": 1,
+          "L": 0,
+          "overallW": 1,
+          "overallL": 0
+        },
+        {
+          "team": "Samford",
+          "W": 1,
+          "L": 0,
+          "overallW": 1,
+          "overallL": 0
+        },
+        {
           "team": "Alcorn State",
+          "W": 0,
+          "L": 1,
+          "overallW": 0,
+          "overallL": 1
+        },
+        {
+          "team": "Jackson State",
+          "W": 0,
+          "L": 1,
+          "overallW": 0,
+          "overallL": 1
+        },
+        {
+          "team": "Prairie View A&M",
           "W": 0,
           "L": 1,
           "overallW": 0,
@@ -6296,6 +6785,13 @@ var data = {
         },
         {
           "week": 6,
+          "home": "Miss Valley State",
+          "away": "Alabama A&M",
+          "homeScore": 42,
+          "awayScore": 17
+        },
+        {
+          "week": 6,
           "home": "UNI",
           "away": "Harvard",
           "homeScore": 14,
@@ -6316,6 +6812,20 @@ var data = {
           "L": 0,
           "overallW": 1,
           "overallL": 0
+        },
+        {
+          "team": "Miss Valley State",
+          "W": 1,
+          "L": 0,
+          "overallW": 1,
+          "overallL": 0
+        },
+        {
+          "team": "Alabama A&M",
+          "W": 0,
+          "L": 1,
+          "overallW": 0,
+          "overallL": 1
         },
         {
           "team": "Tennessee Martin",
@@ -6348,6 +6858,13 @@ var data = {
           "away": "The Citadel",
           "homeScore": 13,
           "awayScore": 31
+        },
+        {
+          "week": 6,
+          "home": "Ohio",
+          "away": "Columbia",
+          "homeScore": 66,
+          "awayScore": 0
         }
       ],
       "standings": [
@@ -6359,11 +6876,25 @@ var data = {
           "overallL": 0
         },
         {
+          "team": "Ohio",
+          "W": 1,
+          "L": 0,
+          "overallW": 1,
+          "overallL": 0
+        },
+        {
           "team": "The Citadel",
           "W": 1,
           "L": 0,
           "overallW": 1,
           "overallL": 0
+        },
+        {
+          "team": "Columbia",
+          "W": 0,
+          "L": 1,
+          "overallW": 0,
+          "overallL": 1
         },
         {
           "team": "McNeese State",
@@ -6381,6 +6912,75 @@ var data = {
         }
       ]
     },
+    "Group 2BF": {
+      "games": [
+        {
+          "week": 6,
+          "home": "Eastern Washington",
+          "away": "SMS",
+          "homeScore": 28,
+          "awayScore": 38
+        },
+        {
+          "week": 6,
+          "home": "Portland State",
+          "away": "Indiana State",
+          "homeScore": 41,
+          "awayScore": 14
+        },
+        {
+          "week": 6,
+          "home": "Western Carolina",
+          "away": "Appalachian State",
+          "homeScore": 24,
+          "awayScore": 17
+        }
+      ],
+      "standings": [
+        {
+          "team": "Portland State",
+          "W": 1,
+          "L": 0,
+          "overallW": 1,
+          "overallL": 0
+        },
+        {
+          "team": "SMS",
+          "W": 1,
+          "L": 0,
+          "overallW": 1,
+          "overallL": 0
+        },
+        {
+          "team": "Western Carolina",
+          "W": 1,
+          "L": 0,
+          "overallW": 1,
+          "overallL": 0
+        },
+        {
+          "team": "Appalachian State",
+          "W": 0,
+          "L": 1,
+          "overallW": 0,
+          "overallL": 1
+        },
+        {
+          "team": "Eastern Washington",
+          "W": 0,
+          "L": 1,
+          "overallW": 0,
+          "overallL": 1
+        },
+        {
+          "team": "Indiana State",
+          "W": 0,
+          "L": 1,
+          "overallW": 0,
+          "overallL": 1
+        }
+      ]
+    },
     "Group 2BG": {
       "games": [
         {
@@ -6389,6 +6989,20 @@ var data = {
           "away": "Buffalo",
           "homeScore": 0,
           "awayScore": 52
+        },
+        {
+          "week": 6,
+          "home": "Texas State",
+          "away": "Nicholls State",
+          "homeScore": 7,
+          "awayScore": 21
+        },
+        {
+          "week": 6,
+          "home": "Youngstown State",
+          "away": "Princeton",
+          "homeScore": 21,
+          "awayScore": 28
         }
       ],
       "standings": [
@@ -6400,7 +7014,35 @@ var data = {
           "overallL": 0
         },
         {
+          "team": "Nicholls State",
+          "W": 1,
+          "L": 0,
+          "overallW": 1,
+          "overallL": 0
+        },
+        {
+          "team": "Princeton",
+          "W": 1,
+          "L": 0,
+          "overallW": 1,
+          "overallL": 0
+        },
+        {
           "team": "Northeastern",
+          "W": 0,
+          "L": 1,
+          "overallW": 0,
+          "overallL": 1
+        },
+        {
+          "team": "Texas State",
+          "W": 0,
+          "L": 1,
+          "overallW": 0,
+          "overallL": 1
+        },
+        {
+          "team": "Youngstown State",
           "W": 0,
           "L": 1,
           "overallW": 0,
@@ -6416,9 +7058,37 @@ var data = {
           "away": "San Jose State",
           "homeScore": 28,
           "awayScore": 34
+        },
+        {
+          "week": 6,
+          "home": "Furman",
+          "away": "Eastern Illinois",
+          "homeScore": 34,
+          "awayScore": 17
+        },
+        {
+          "week": 6,
+          "home": "Arizona State",
+          "away": "Yale",
+          "homeScore": 41,
+          "awayScore": 10
         }
       ],
       "standings": [
+        {
+          "team": "Arizona State",
+          "W": 1,
+          "L": 0,
+          "overallW": 1,
+          "overallL": 0
+        },
+        {
+          "team": "Furman",
+          "W": 1,
+          "L": 0,
+          "overallW": 1,
+          "overallL": 0
+        },
         {
           "team": "San Jose State",
           "W": 1,
@@ -6427,7 +7097,21 @@ var data = {
           "overallL": 0
         },
         {
+          "team": "Eastern Illinois",
+          "W": 0,
+          "L": 1,
+          "overallW": 0,
+          "overallL": 1
+        },
+        {
           "team": "Murray State",
+          "W": 0,
+          "L": 1,
+          "overallW": 0,
+          "overallL": 1
+        },
+        {
+          "team": "Yale",
           "W": 0,
           "L": 1,
           "overallW": 0,
@@ -6439,6 +7123,20 @@ var data = {
       "games": [
         {
           "week": 6,
+          "home": "Penn",
+          "away": "Elon",
+          "homeScore": 38,
+          "awayScore": 21
+        },
+        {
+          "week": 6,
+          "home": "Grambling State",
+          "away": "Cornell",
+          "homeScore": 28,
+          "awayScore": 14
+        },
+        {
+          "week": 6,
           "home": "TCU",
           "away": "Alabama State",
           "homeScore": 55,
@@ -6446,6 +7144,20 @@ var data = {
         }
       ],
       "standings": [
+        {
+          "team": "Grambling State",
+          "W": 1,
+          "L": 0,
+          "overallW": 1,
+          "overallL": 0
+        },
+        {
+          "team": "Penn",
+          "W": 1,
+          "L": 0,
+          "overallW": 1,
+          "overallL": 0
+        },
         {
           "team": "TCU",
           "W": 1,
@@ -6455,6 +7167,20 @@ var data = {
         },
         {
           "team": "Alabama State",
+          "W": 0,
+          "L": 1,
+          "overallW": 0,
+          "overallL": 1
+        },
+        {
+          "team": "Cornell",
+          "W": 0,
+          "L": 1,
+          "overallW": 0,
+          "overallL": 1
+        },
+        {
+          "team": "Elon",
           "W": 0,
           "L": 1,
           "overallW": 0,
@@ -6535,6 +7261,13 @@ var data = {
       "games": [
         {
           "week": 6,
+          "home": "Illinois State",
+          "away": "Rhode Island",
+          "homeScore": 16,
+          "awayScore": 20
+        },
+        {
+          "week": 6,
           "home": "Montana",
           "away": "Idaho State",
           "homeScore": 73,
@@ -6564,6 +7297,13 @@ var data = {
           "overallL": 0
         },
         {
+          "team": "Rhode Island",
+          "W": 1,
+          "L": 0,
+          "overallW": 1,
+          "overallL": 0
+        },
+        {
           "team": "Arkansas Pine Bluff",
           "W": 0,
           "L": 1,
@@ -6572,6 +7312,13 @@ var data = {
         },
         {
           "team": "Idaho State",
+          "W": 0,
+          "L": 1,
+          "overallW": 0,
+          "overallL": 1
+        },
+        {
+          "team": "Illinois State",
           "W": 0,
           "L": 1,
           "overallW": 0,
